@@ -1,0 +1,4 @@
+.connet-box {
+  display: flex;
+	flex-direction: column;
+}
