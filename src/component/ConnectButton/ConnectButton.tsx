@@ -1,4 +1,4 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import { useConnect } from 'wagmi';
 import styles from './ConnectButton.module.css';
 
 export function ConnectButton() {
