@@ -7,7 +7,6 @@ import { useAccount } from 'wagmi';
 const API_KEY = "2mW1719EGnQiDf2OjHZIjN4Ag6x"
 
 const getData = (address: `0x${string}`, chain_id: number| undefined) => {
-	console.log("address fetch", address, chain_id)
 	return axios.get<IResponseCoins>(`https://api.chainbase.online/v1/account/tokens?chain_id=${chain_id}&limit=100&address=${address}`,{ headers: {'x-api-key': API_KEY} });
 };
 

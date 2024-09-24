@@ -2,6 +2,7 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import styles from './ConnectButton.module.css';
 import { Button } from 'pixel-retroui';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function ConnectButton() {
 	const { connectors, connect } = useConnect();
@@ -11,6 +12,9 @@ export function ConnectButton() {
 	const [openConnector, setOpenConnector] = useState(false);
 
 	const { disconnect } = useDisconnect();
+
+	const queryClient = useQueryClient();
+
 	return (
 		<div className={styles['connet-box']}>
 			{account.isConnected ? (
@@ -19,6 +23,7 @@ export function ConnectButton() {
 					onClick={() => {
 						disconnect();
 						setOpenConnector(false);
+						queryClient.removeQueries({ queryKey: ['coins'] });
 					}}
 					className={styles['disconnect-button']}
 				>

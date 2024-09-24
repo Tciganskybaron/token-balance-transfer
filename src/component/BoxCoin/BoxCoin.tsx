@@ -1,29 +1,31 @@
 import styles from './BoxCoin.module.css';
 import { useCoins } from '../../hooks';
-import { parseUnits, formatUnits } from 'viem';
+import { formatUnits } from 'viem';
 import { useState } from 'react';
-import { CardCoin, Modal } from '..';
-import { useAccount } from 'wagmi';
+import { CardCoin, Popup } from '..';
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'; // Импортируем хук
 
 export function BoxCoin() {
-	const [openModal, setOpenModal] = useState(false);
+	const [openPopup, setOpenPopup] = useState(false);
 	const [coinAddress, setCoinAddres] = useState('');
+	const [visibleCoins] = useInfiniteScroll(20, 20); // Используем хук
 
 	const { data } = useCoins();
 
 	const transferCoin = (coinAddress: string) => {
-		setOpenModal(true);
+		setOpenPopup(true);
 		setCoinAddres(coinAddress);
 	};
+
 	if (!data) return null;
 
-	console.log('BoxCoin', openModal, coinAddress);
+	console.log('BoxCoin', openPopup, coinAddress);
 
 	return (
 		<div className={styles['coin-box']}>
 			{data && (
 				<>
-					{data.map(coin => {
+					{data.slice(0, visibleCoins).map(coin => {
 						const balance = BigInt(coin.balance);
 						const formattedBalance = formatUnits(balance, coin.decimals);
 
@@ -33,6 +35,7 @@ export function BoxCoin() {
 					})}
 				</>
 			)}
+			{openPopup && <Popup open={openPopup} onClose={() => setOpenPopup(false)} />}
 		</div>
 	);
 }
