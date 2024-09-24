@@ -4,7 +4,7 @@ import { Button } from 'pixel-retroui';
 import { useState } from 'react';
 
 export function ConnectButton() {
-	const { connectors, connect, status, error } = useConnect();
+	const { connectors, connect } = useConnect();
 
 	const account = useAccount();
 

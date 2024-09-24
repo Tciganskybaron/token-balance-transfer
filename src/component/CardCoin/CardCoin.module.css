@@ -1,0 +1,9 @@
+.card {
+	width: 50%;
+}
+
+.coin-transfer{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

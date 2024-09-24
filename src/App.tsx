@@ -1,13 +1,10 @@
-import { Header } from './component';
-import { Button } from 'pixel-retroui';
+import { Header, BoxCoin } from './component';
 
 function App() {
 	return (
 		<>
 			<Header />
-			{/* <ConnectButton />
-			<DisconnectButton />
-			<BoxCoin /> */}
+			<BoxCoin />
 		</>
 	);
 }
