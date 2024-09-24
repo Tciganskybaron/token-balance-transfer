@@ -14,7 +14,7 @@ const getData = (address: `0x${string}`, chain_id: number| undefined) => {
 export function useCoins() {
   const account = useAccount();
 
-  const { data, isError, isSuccess } = useQuery({
+  const { data, isError, isSuccess, isLoading } = useQuery({
 		queryKey: ['coins'],
 		queryFn: () => getData(account.address as `0x${string}`, account.chainId ),
 		select: data => data.data.data,
@@ -29,5 +29,5 @@ export function useCoins() {
 		if (isError) console.log('Data fetched error');
 	}, [isError]);
 
-	return { data, isError, isSuccess }
+	return { data, isError, isSuccess, isLoading }
 }
