@@ -34,7 +34,11 @@ export function BoxCoin() {
 					})}
 				</>
 			)}
-			{openPopup && <Popup open={openPopup} onClose={() => setOpenPopup(false)} />}
+			{openPopup && (
+				<Popup open={openPopup} onClose={() => setOpenPopup(false)}>
+					<div>Aloha</div>
+				</Popup>
+			)}
 		</div>
 	);
 }
