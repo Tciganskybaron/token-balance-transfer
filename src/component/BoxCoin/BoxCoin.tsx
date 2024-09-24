@@ -3,6 +3,7 @@ import { useCoins } from '../../hooks';
 import { parseUnits, formatUnits } from 'viem';
 import { useState } from 'react';
 import { Modal } from '..';
+import { useAccount } from 'wagmi';
 
 const isAuth = true;
 
@@ -10,14 +11,12 @@ export function BoxCoin() {
 	const [openModal, setOpenModal] = useState(false);
 	const [coinAddress, setCoinAddres] = useState('');
 
-	const { data } = useCoins(isAuth);
+	const { data } = useCoins();
 
 	const transferCoin = (coinAddress: string) => {
 		setOpenModal(true);
 		setCoinAddres(coinAddress);
 	};
-	console.log('data', data);
-
 	if (!data) return null;
 
 	// Пример вашего баланса в шестнадцатеричном формате
@@ -34,7 +33,7 @@ export function BoxCoin() {
 	return (
 		<div className={styles['coin-box']}>
 			Box Coin
-			{data && (
+			{/* {data && (
 				<div>
 					{data.map(coin => {
 						const balance = BigInt(coin.balance);
@@ -53,7 +52,7 @@ export function BoxCoin() {
 						</Modal>
 					)}
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 }

@@ -1,12 +1,13 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { ConnectButton, DisconnectButton, BoxCoin } from './component';
+import { Header } from './component';
+import { Button } from 'pixel-retroui';
 
 function App() {
 	return (
 		<>
-			<ConnectButton />
+			<Header />
+			{/* <ConnectButton />
 			<DisconnectButton />
-			<BoxCoin />
+			<BoxCoin /> */}
 		</>
 	);
 }

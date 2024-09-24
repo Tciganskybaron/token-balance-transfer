@@ -1,0 +1,12 @@
+.header{
+	margin: 20px;
+  display: flex;
+}
+
+.logo {
+	font-size: 120px;
+}
+
+.button-group {
+	min-width: 500px;
+}

@@ -2,21 +2,24 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { IResponseCoins } from '../interface';
+import { useAccount } from 'wagmi';
 
-const address = '0xA4Df2Fa0fAD5Ed7f69506CC6b2b56F0A271C054B'
 const API_KEY = "2mW1719EGnQiDf2OjHZIjN4Ag6x"
 
-const getData = () => {
-	return axios.get<IResponseCoins>(`https://api.chainbase.online/v1/account/tokens?chain_id=8453&limit=100&address=${address}`,{ headers: {'x-api-key': API_KEY} });
+const getData = (address: `0x${string}`, chain_id: number| undefined) => {
+	console.log("address fetch", address, chain_id)
+	return axios.get<IResponseCoins>(`https://api.chainbase.online/v1/account/tokens?chain_id=${chain_id}&limit=100&address=${address}`,{ headers: {'x-api-key': API_KEY} });
 };
 
 
-export function useCoins(isEnabled: boolean) {
-		const { data, isError, isSuccess } = useQuery({
-		queryKey: ['posts'],
-		queryFn: getData,
+export function useCoins() {
+  const account = useAccount();
+
+  const { data, isError, isSuccess } = useQuery({
+		queryKey: ['coins'],
+		queryFn: () => getData(account.address as `0x${string}`, account.chainId ),
 		select: data => data.data.data,
-		enabled: isEnabled,
+		enabled: !!account.isConnected,
 	});
 
 	useEffect(() => {

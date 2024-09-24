@@ -1,18 +1,40 @@
-import { useConnect } from 'wagmi';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import styles from './ConnectButton.module.css';
+import { Button } from 'pixel-retroui';
+import { useState } from 'react';
 
 export function ConnectButton() {
 	const { connectors, connect, status, error } = useConnect();
+
+	const account = useAccount();
+
+	const [openConnector, setOpenConnector] = useState(false);
+
+	const { disconnect } = useDisconnect();
 	return (
 		<div className={styles['connet-box']}>
-			<h2>Connect</h2>
-			{connectors.map(connector => (
-				<button key={connector.uid} onClick={() => connect({ connector })} type="button">
-					{connector.name}
-				</button>
-			))}
-			<div>{status}</div>
-			<div>{error?.message}</div>
+			{account.isConnected ? (
+				<Button
+					type="button"
+					onClick={() => {
+						disconnect();
+						setOpenConnector(false);
+					}}
+					className={styles['disconnect-button']}
+				>
+					Disconnect: {account.address}
+				</Button>
+			) : openConnector ? (
+				connectors.map(connector => (
+					<Button key={connector.uid} onClick={() => connect({ connector })} type="button">
+						{connector.name}
+					</Button>
+				))
+			) : (
+				<Button type="button" onClick={() => setOpenConnector(true)}>
+					Connected
+				</Button>
+			)}
 		</div>
 	);
 }
