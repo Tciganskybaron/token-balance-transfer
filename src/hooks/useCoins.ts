@@ -4,7 +4,7 @@ import { IResponseCoins } from '../interface';
 import { useAccount } from 'wagmi';
 import { API_CHAINBASE } from '../helpers/constant';
 
-const API_KEY = "2mW1719EGnQiDf2OjHZIjN4Ag6x"
+const API_KEY = import.meta.env.VITE_API_CHAINBASE_KEY;
 
 const getData = (address: `0x${string}`, chain_id: number | undefined) => {
 	return axios.get<IResponseCoins>(API_CHAINBASE, {

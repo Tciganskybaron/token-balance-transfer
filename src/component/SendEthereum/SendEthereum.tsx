@@ -10,7 +10,7 @@ import { ISendEthereumProps } from './SendEthereum.props';
 import { getTransactionUrl } from '../../helpers/getTransactionUrl';
 
 export function SendEthereum({ balance }: ISendEthereumProps) {
-	const { data: hash, sendTransaction, isPending } = useSendTransaction();
+	const { data: hash, sendTransaction, isPending, isSuccess, isError, error: errorTransaction } = useSendTransaction();
 	const account = useAccount();
 
 	const [address, setAddress] = useState('');
@@ -67,12 +67,13 @@ export function SendEthereum({ balance }: ISendEthereumProps) {
 				<Button type="submit" disabled={isPending}>
 					{isPending ? 'Sending...' : 'Transfer'}
 				</Button>
+				{isSuccess && <div>Transaction successful!</div>}
+				{isError && <div>Error: {errorTransaction?.message}</div>}
 			</div>
-
 			{hash && (
 				<div>
 					Transaction Hash:{' '}
-					<a className={styles.link} href={getTransactionUrl(account.chainId, hash)}>
+					<a target="_blank" className={styles.link} href={getTransactionUrl(account.chainId, hash)}>
 						{hash}
 					</a>
 				</div>

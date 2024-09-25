@@ -1,16 +1,18 @@
 import cn from 'classnames';
 import styles from './SendERC20Token.module.css';
 import { useState } from 'react';
-import { useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 import { Bubble, Button, Input } from 'pixel-retroui';
 import { abi } from '../../helpers/abi';
 import { ISendERC20TokenProps } from './SendERC20TokenProps.props';
 import { validateAddress } from '../../helpers/validateAddress';
 import { validateValue } from '../../helpers/validateValue';
 import { formatUnits } from 'viem';
+import { getTransactionUrl } from '../../helpers/getTransactionUrl';
 
 export function SendERC20Token({ coin }: ISendERC20TokenProps) {
-	const { writeContract, isSuccess, isError, error: err, isPending, data } = useWriteContract();
+	const { writeContract, isSuccess, isError, error: errorTransaction, isPending, data: hash } = useWriteContract();
+	const account = useAccount();
 
 	const [address, setAddress] = useState('');
 	const [value, setValue] = useState('');
@@ -75,12 +77,17 @@ export function SendERC20Token({ coin }: ISendERC20TokenProps) {
 				<Button type="submit" disabled={isPending}>
 					{isPending ? 'Sending...' : 'Transfer'}
 				</Button>
-
 				{isSuccess && <div>Transaction successful!</div>}
-
-				{isError && <div>Error: {err?.message}</div>}
+				{isError && <div>Error: {errorTransaction?.message}</div>}
 			</div>
-			{data && <div>Transaction Hash: {data}</div>}
+			{hash && (
+				<div>
+					Transaction Hash:{' '}
+					<a target="_blank" className={styles.link} href={getTransactionUrl(account.chainId, hash)}>
+						{hash}
+					</a>
+				</div>
+			)}
 		</form>
 	);
 }
