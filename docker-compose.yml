@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  token-balance-transfer:
+    image: token-balance-transfer
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    environment:
+       NODE_ENV: production
+       VITE_API_CHAINBASE_KEY: "2mW1719EGnQiDf2OjHZIjN4Ag6x"
+    ports:
+      - 3000:3000
