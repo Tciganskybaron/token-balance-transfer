@@ -7,7 +7,7 @@ export interface IResponseCoins {
 }
 
 export interface ICoin {
-  contract_address: string
+  contract_address: `0x${string}`
   decimals: number
   name: string
   symbol: string

@@ -1,9 +1,11 @@
+import cn from 'classnames';
+import styles from './SendEthereum.module.css';
 import { useState } from 'react';
 import { useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
-import styles from './SendEthereum.module.css';
 import { Input, Button, Bubble } from 'pixel-retroui';
-import cn from 'classnames';
+import { validateAddress } from '../../helpers/validateAddress';
+import { validateValue } from '../../helpers/validateValue';
 
 export function SendEthereum() {
 	const { data: hash, sendTransaction } = useSendTransaction();
@@ -11,14 +13,6 @@ export function SendEthereum() {
 	const [address, setAddress] = useState('');
 	const [value, setValue] = useState('');
 	const [error, setError] = useState<string | null>(null);
-
-	const validateAddress = (addr: string) => {
-		return /^0x[a-fA-F0-9]{40}$/.test(addr);
-	};
-
-	const validateValue = (val: string) => {
-		return !isNaN(Number(val)) && Number(val) > 0;
-	};
 
 	const resetError = () => {
 		setError(null);

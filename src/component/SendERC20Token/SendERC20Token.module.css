@@ -1,0 +1,21 @@
+.input {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.form {
+	width: 100vh;
+	height: auto;
+}
+
+.button {
+	width: auto;
+}
+
+.bubble {
+	position: absolute !important;
+	top: 60%;
+	left: 80%;
+	transform: translate(-50%, -50%);
+}

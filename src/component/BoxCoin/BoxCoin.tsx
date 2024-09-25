@@ -2,22 +2,21 @@ import styles from './BoxCoin.module.css';
 import { useCoins } from '../../hooks';
 import { formatUnits } from 'viem';
 import { useState } from 'react';
-import { CardCoin, Popup, ProgressBar } from '..';
+import { CardCoin, Popup, ProgressBar, SendERC20Token } from '..';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
+import { ICoin } from '../../interface';
 
 export function BoxCoin() {
 	const [openPopup, setOpenPopup] = useState(false);
-	const [coinAddress, setCoinAddres] = useState('');
+	const [coin, setCoin] = useState<ICoin | null>(null);
 	const [visibleCoins] = useInfiniteScroll(20, 20);
 
 	const { data, isLoading } = useCoins();
 
-	const transferCoin = (coinAddress: string) => {
+	const transferCoin = (coin: ICoin) => {
 		setOpenPopup(true);
-		setCoinAddres(coinAddress);
+		setCoin(coin);
 	};
-
-	console.log('BoxCoin', openPopup, coinAddress);
 
 	return (
 		<div className={styles['coin-box']}>
@@ -29,14 +28,14 @@ export function BoxCoin() {
 						const formattedBalance = formatUnits(balance, coin.decimals);
 
 						return (
-							<CardCoin key={coin.contract_address} balance={formattedBalance} name={coin.name} symbol={coin.symbol} transferCoin={() => transferCoin(coin.contract_address)} />
+							<CardCoin key={coin.contract_address} balance={formattedBalance} name={coin.name} symbol={coin.symbol} transferCoin={() => transferCoin(coin)} />
 						);
 					})}
 				</>
 			)}
-			{openPopup && (
+			{openPopup && coin && (
 				<Popup open={openPopup} onClose={() => setOpenPopup(false)}>
-					<div>Aloha</div>
+					<SendERC20Token coin={coin} />
 				</Popup>
 			)}
 		</div>
