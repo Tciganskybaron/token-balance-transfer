@@ -72,8 +72,8 @@ export function SendEthereum({ balance }: ISendEthereumProps) {
 			{hash && (
 				<div>
 					Transaction Hash:{' '}
-					<a className={styles.link} href={getTransactionUrl(account.chainId, '0x6c931497b7ac918e9f08febfed2f8772543439ad476656ff3b1cc5e658caddae')}>
-						0x6c931497b7ac918e9f08febfed2f8772543439ad476656ff3b1cc5e658caddae
+					<a className={styles.link} href={getTransactionUrl(account.chainId, hash)}>
+						{hash}
 					</a>
 				</div>
 			)}

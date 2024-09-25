@@ -16,8 +16,6 @@ export function ProgressBar() {
 		};
 	}, []); 
 
-	console.log('progress', progress);
-
 	return (
 		<div className={styles.loader}>
 			<ProgressBarUi size="lg" color="black" borderColor="black" className={cn('w-full')} progress={progress} />

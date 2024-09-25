@@ -37,8 +37,6 @@ export function SendERC20Token({ coin }: ISendERC20TokenProps) {
 
 		const amount = BigInt(1 * 10 ** coin.decimals);
 
-		console.log('submit', coin.contract_address, address, amount);
-
 		writeContract({
 			abi,
 			address: coin.contract_address,
