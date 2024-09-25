@@ -9,7 +9,7 @@
 	height: auto;
 }
 
-.button{
+.button {
 	width: auto;
 }
 
@@ -18,4 +18,30 @@
 	top: 60%;
 	left: 80%;
 	transform: translate(-50%, -50%);
+}
+
+.value {
+	display: flex;
+	justify-content: space-between;
+}
+
+.balance {
+	display: flex;
+	gap: 10px;
+}
+
+.max {
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+	transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.max:active {
+	transform: scale(0.95);
+	color: #f47171;
+}
+
+.hidden {
+	visibility: hidden;
 }

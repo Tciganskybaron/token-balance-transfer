@@ -1,9 +1,10 @@
-import { Card } from 'pixel-retroui';
-import styles from './EthereumCard.module.css';
 import cn from 'classnames';
-import { Button } from 'pixel-retroui';
-import { useAccount, useBalance } from 'wagmi';
+import styles from './EthereumCard.module.css';
 import { useState } from 'react';
+import { formatUnits } from 'viem';
+import { useAccount, useBalance } from 'wagmi';
+import { Card } from 'pixel-retroui';
+import { Button } from 'pixel-retroui';
 import { Popup } from '../Popup/Popup';
 import { SendEthereum } from '..';
 
@@ -12,22 +13,23 @@ export function EthereumCard() {
 
 	const [openPopup, setOpenPopup] = useState(false);
 
-	const result = useBalance({
+	const { data: balanceData } = useBalance({
 		address: account.address,
-		unit: 'ether',
+		unit: 'wei',
 	});
 
+	const balance = balanceData ? formatUnits(balanceData.value, 18) : '0';
 
 	return (
 		<Card className={cn('p-4', styles.card)}>
 			<h2 className={styles.title}>Ethereum</h2>
 			<div className={styles.transfer}>
-				<span>{result.data?.formatted}</span> <strong>ETH</strong>
+				<span>{balance}</span> <strong>ETH</strong>
 				<Button onClick={() => setOpenPopup(true)}>Transfer</Button>
 			</div>
 			{openPopup && (
 				<Popup open={openPopup} onClose={() => setOpenPopup(false)}>
-					<SendEthereum />
+					<SendEthereum balance={balance} />
 				</Popup>
 			)}
 		</Card>

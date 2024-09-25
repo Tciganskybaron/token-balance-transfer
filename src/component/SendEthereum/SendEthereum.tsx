@@ -6,8 +6,9 @@ import { parseEther } from 'viem';
 import { Input, Button, Bubble } from 'pixel-retroui';
 import { validateAddress } from '../../helpers/validateAddress';
 import { validateValue } from '../../helpers/validateValue';
+import { ISendEthereumProps } from './SendEthereum.props';
 
-export function SendEthereum() {
+export function SendEthereum({ balance }: ISendEthereumProps) {
 	const { data: hash, sendTransaction } = useSendTransaction();
 
 	const [address, setAddress] = useState('');
@@ -40,7 +41,21 @@ export function SendEthereum() {
 			<div className={styles.input}>
 				<span>Address:</span>
 				<Input name="address" placeholder="0xA0Cf…251e" value={address} onChange={e => setAddress(e.target.value)} onClick={resetError} required />
-				<span>Value:</span>
+				<div className={styles.value}>
+					<span>Value:</span>
+					<div className={styles.balance}>
+						<span>Balance:</span>
+						<span>{balance}</span>
+						<span
+							onClick={() => setValue(balance)}
+							className={cn(styles.max, {
+								[styles.hidden]: value >= balance,
+							})}
+						>
+							Max
+						</span>
+					</div>
+				</div>
 				<Input name="value" placeholder="0.05" value={value} onChange={e => setValue(e.target.value)} onClick={resetError} required type="number" />
 				{error && (
 					<Bubble direction="left" bg="#ef6995" textColor="#44573c" borderColor="#44573c" className={cn('p-1', styles.bubble)}>
