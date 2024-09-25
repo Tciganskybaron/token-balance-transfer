@@ -45,3 +45,12 @@
 .hidden {
 	visibility: hidden;
 }
+
+.link {
+	color: blue;
+  width: 100%;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -1,15 +1,17 @@
 import cn from 'classnames';
 import styles from './SendEthereum.module.css';
 import { useState } from 'react';
-import { useSendTransaction } from 'wagmi';
+import { useAccount, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
 import { Input, Button, Bubble } from 'pixel-retroui';
 import { validateAddress } from '../../helpers/validateAddress';
 import { validateValue } from '../../helpers/validateValue';
 import { ISendEthereumProps } from './SendEthereum.props';
+import { getTransactionUrl } from '../../helpers/getTransactionUrl';
 
 export function SendEthereum({ balance }: ISendEthereumProps) {
-	const { data: hash, sendTransaction } = useSendTransaction();
+	const { data: hash, sendTransaction, isPending } = useSendTransaction();
+	const account = useAccount();
 
 	const [address, setAddress] = useState('');
 	const [value, setValue] = useState('');
@@ -62,11 +64,19 @@ export function SendEthereum({ balance }: ISendEthereumProps) {
 						{error}
 					</Bubble>
 				)}
-				<Button className={styles.button} bg="darkgray" shadow="gray" type="submit">
-					Send
+				<Button type="submit" disabled={isPending}>
+					{isPending ? 'Sending...' : 'Transfer'}
 				</Button>
 			</div>
-			{hash && <div>Transaction Hash: {hash}</div>}
+
+			{hash && (
+				<div>
+					Transaction Hash:{' '}
+					<a className={styles.link} href={getTransactionUrl(account.chainId, '0x6c931497b7ac918e9f08febfed2f8772543439ad476656ff3b1cc5e658caddae')}>
+						0x6c931497b7ac918e9f08febfed2f8772543439ad476656ff3b1cc5e658caddae
+					</a>
+				</div>
+			)}
 		</form>
 	);
 }

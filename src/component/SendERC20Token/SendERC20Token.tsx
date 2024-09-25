@@ -7,6 +7,7 @@ import { abi } from '../../helpers/abi';
 import { ISendERC20TokenProps } from './SendERC20TokenProps.props';
 import { validateAddress } from '../../helpers/validateAddress';
 import { validateValue } from '../../helpers/validateValue';
+import { formatUnits } from 'viem';
 
 export function SendERC20Token({ coin }: ISendERC20TokenProps) {
 	const { writeContract, isSuccess, isError, error: err, isPending, data } = useWriteContract();
@@ -18,6 +19,9 @@ export function SendERC20Token({ coin }: ISendERC20TokenProps) {
 	const resetError = () => {
 		setError(null);
 	};
+
+	const balanceBig = BigInt(coin.balance);
+	const balance = formatUnits(balanceBig, coin.decimals);
 
 	const submit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -48,24 +52,36 @@ export function SendERC20Token({ coin }: ISendERC20TokenProps) {
 			<div className={styles.input}>
 				<span>Address:</span>
 				<Input name="address" placeholder="0xA0Cf…251e" value={address} onChange={e => setAddress(e.target.value)} onClick={resetError} required />
-				<span>Value:</span>
+				<div className={styles.value}>
+					<span>Value:</span>
+					<div className={styles.balance}>
+						<span>Balance:</span>
+						<span>{balance}</span>
+						<span
+							onClick={() => setValue(balance)}
+							className={cn(styles.max, {
+								[styles.hidden]: value >= balance,
+							})}
+						>
+							Max
+						</span>
+					</div>
+				</div>
 				<Input name="value" placeholder="0.05" value={value} onChange={e => setValue(e.target.value)} onClick={resetError} required type="number" />
 				{error && (
 					<Bubble direction="left" bg="#ef6995" textColor="#44573c" borderColor="#44573c" className={cn('p-1', styles.bubble)}>
 						{error}
 					</Bubble>
 				)}
-				<div>
-					<Button type="submit" disabled={isPending}>
-						{isPending ? 'Sending...' : 'Transfer'}
-					</Button>
 
-					{isSuccess && <div>Transaction successful!</div>}
+				<Button type="submit" disabled={isPending}>
+					{isPending ? 'Sending...' : 'Transfer'}
+				</Button>
 
-					{isError && <div>Error: {err?.message}</div>}
-				</div>
+				{isSuccess && <div>Transaction successful!</div>}
+
+				{isError && <div>Error: {err?.message}</div>}
 			</div>
-			{/* {hash && <div>Transaction Hash: {hash}</div>} */}
 			{data && <div>Transaction Hash: {data}</div>}
 		</form>
 	);
