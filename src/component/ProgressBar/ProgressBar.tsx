@@ -1,7 +1,7 @@
-import styles from './ProgressBar.module.css';
-import cn from 'classnames';
-import { ProgressBar as ProgressBarUi } from 'pixel-retroui';
 import { useEffect, useState } from 'react';
+import cn from 'classnames';
+import styles from './ProgressBar.module.css';
+import { ProgressBar as ProgressBarUi } from 'pixel-retroui';
 
 export function ProgressBar() {
 	const [progress, setProgress] = useState(0);
@@ -14,7 +14,7 @@ export function ProgressBar() {
 		return () => {
 			clearInterval(id);
 		};
-	}, []); 
+	}, []);
 
 	return (
 		<div className={styles.loader}>

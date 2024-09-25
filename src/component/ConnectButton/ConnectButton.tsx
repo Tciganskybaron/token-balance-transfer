@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import styles from './ConnectButton.module.css';
 import { Button } from 'pixel-retroui';
-import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 export function ConnectButton() {

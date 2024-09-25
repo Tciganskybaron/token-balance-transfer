@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import cn from 'classnames';
 import styles from './EthereumCard.module.css';
-import { useState } from 'react';
 import { formatUnits } from 'viem';
 import { useAccount, useBalance } from 'wagmi';
 import { Card } from 'pixel-retroui';

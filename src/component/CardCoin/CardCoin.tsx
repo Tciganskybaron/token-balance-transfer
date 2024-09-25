@@ -1,7 +1,7 @@
+import cn from 'classnames';
+import styles from './CardCoin.module.css';
 import { Card } from 'pixel-retroui';
 import { ICardCoinProps } from './CardCoin.props';
-import styles from './CardCoin.module.css';
-import cn from 'classnames';
 import { Button } from 'pixel-retroui';
 
 export function CardCoin({ balance, name, symbol, transferCoin }: ICardCoinProps) {

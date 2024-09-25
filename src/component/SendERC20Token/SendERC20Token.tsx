@@ -2,12 +2,12 @@ import cn from 'classnames';
 import styles from './SendERC20Token.module.css';
 import { useState } from 'react';
 import { useAccount, useWriteContract } from 'wagmi';
+import { formatUnits } from 'viem';
 import { Bubble, Button, Input } from 'pixel-retroui';
 import { abi } from '../../helpers/abi';
 import { ISendERC20TokenProps } from './SendERC20TokenProps.props';
 import { validateAddress } from '../../helpers/validateAddress';
 import { validateValue } from '../../helpers/validateValue';
-import { formatUnits } from 'viem';
 import { getTransactionUrl } from '../../helpers/getTransactionUrl';
 
 export function SendERC20Token({ coin }: ISendERC20TokenProps) {

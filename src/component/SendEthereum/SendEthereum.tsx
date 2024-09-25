@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import cn from 'classnames';
 import styles from './SendEthereum.module.css';
-import { useState } from 'react';
 import { useAccount, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem';
 import { Input, Button, Bubble } from 'pixel-retroui';

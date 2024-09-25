@@ -1,7 +1,7 @@
-import styles from './BoxCoin.module.css';
-import { useCoins } from '../../hooks';
-import { formatUnits } from 'viem';
 import { useState } from 'react';
+import styles from './BoxCoin.module.css';
+import { formatUnits } from 'viem';
+import { useCoins } from '../../hooks';
 import { CardCoin, Popup, ProgressBar, SendERC20Token } from '..';
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll';
 import { ICoin } from '../../interface';
@@ -27,9 +27,7 @@ export function BoxCoin() {
 						const balance = BigInt(coin.balance);
 						const formattedBalance = formatUnits(balance, coin.decimals);
 
-						return (
-							<CardCoin key={coin.contract_address} balance={formattedBalance} name={coin.name} symbol={coin.symbol} transferCoin={() => transferCoin(coin)} />
-						);
+						return <CardCoin key={coin.contract_address} balance={formattedBalance} name={coin.name} symbol={coin.symbol} transferCoin={() => transferCoin(coin)} />;
 					})}
 				</>
 			)}
