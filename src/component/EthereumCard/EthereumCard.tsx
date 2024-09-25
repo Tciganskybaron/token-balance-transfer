@@ -24,7 +24,7 @@ export function EthereumCard() {
 		<Card className={cn('p-4', styles.card)}>
 			<h2 className={styles.title}>Ethereum</h2>
 			<div className={styles.transfer}>
-				<span>{balance}</span> <strong>ETH</strong>
+				<span>{balance}</span> <strong className={styles.symbol}>ETH</strong>
 				<Button onClick={() => setOpenPopup(true)}>Transfer</Button>
 			</div>
 			{openPopup && (

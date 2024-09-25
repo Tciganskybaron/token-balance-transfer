@@ -46,8 +46,8 @@ export function SendEthereum({ balance }: ISendEthereumProps) {
 				<div className={styles.value}>
 					<span>Value:</span>
 					<div className={styles.balance}>
-						<span>Balance:</span>
-						<span>{balance}</span>
+						<span className={styles['balance-text']}>Balance:</span>
+						<span className={styles['balance-value']}>{balance}</span>
 						<span
 							onClick={() => setValue(balance)}
 							className={cn(styles.max, {

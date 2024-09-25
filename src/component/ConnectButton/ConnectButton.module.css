@@ -1,9 +1,19 @@
 .connet-box {
-  display: flex;
+	display: flex;
 	flex-direction: column;
+	gap: 5px;
 }
 
-.disconnect-button{
+.disconnect-button {
+	height: 60px;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+	.connet-box {
+		width: 100%;
+		gap: 5px;
+		margin: 10px 0 10px 0;
+	}
 }

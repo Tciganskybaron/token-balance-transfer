@@ -49,10 +49,12 @@ cd token-balance-transfer
 Создайте файл `.env` в корне проекта с содержимым:
 
 ```bash
-VITE_API_CHAINBASE_KEY=your_chainbase_api_key
+VITE_API_CHAINBASE_KEY="your_chainbase_api_key"
+VITE_OPEN_DEVTOOLS="false | true" 
 ```
 
 Замените `your_chainbase_api_key` на ваш ключ API от Chainbase.
+VITE_OPEN_DEVTOOLS добавляет ReactQueryDevtools на страницу.
 
 ### 3. Установка зависимостей
 

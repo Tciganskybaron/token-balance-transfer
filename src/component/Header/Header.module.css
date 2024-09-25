@@ -1,6 +1,6 @@
-.header{
-	margin: 20px;
-  display: flex;
+.header {
+  margin: 20px 0 10px 0;
+	display: flex;
 }
 
 .logo {
@@ -12,4 +12,29 @@
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
+}
+
+@media (max-width: 1200px) {
+	.header {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.logo {
+		font-size: 60px;
+		text-align: center;
+	}
+
+	.button-group {
+		width: 80%;
+		min-width: unset;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.disconnect-button,
+	.connet-box button {
+		width: 100%;
+	}
 }

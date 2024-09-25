@@ -48,9 +48,27 @@
 
 .link {
 	color: blue;
-  width: 100%;
+	width: 100%;
 	display: inline-block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+	.form {
+		width: 100%;
+	}
+
+	.value {
+		justify-content: space-between;
+	}
+
+	.balance-text {
+		display: none;
+	}
+
+	.balance-value {
+		display: none;
+	}
 }

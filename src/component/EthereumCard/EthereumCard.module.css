@@ -1,14 +1,32 @@
-.card{
+.card {
 	display: flex;
 	flex-direction: column;
 }
 
-.transfer{
+.transfer {
 	display: flex;
 	align-items: end;
 	justify-content: space-between;
 }
 
-.title{
+.title {
 	font-size: 32px;
+}
+
+@media (max-width: 1200px) {
+	.card {
+		width: 100%;
+	}
+
+	.symbol {
+		display: none;
+	}
+
+	.transfer {
+		margin-top: 15px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+	}
 }

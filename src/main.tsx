@@ -14,12 +14,14 @@ globalThis.Buffer = Buffer;
 
 const queryClient = new QueryClient();
 
+const OPEN_DEVTOOLS = import.meta.env.VITE_OPEN_DEVTOOLS === true;
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<WagmiProvider config={config}>
 			<QueryClientProvider client={queryClient}>
 				<App />
-				<ReactQueryDevtools initialIsOpen={false} />
+				{OPEN_DEVTOOLS && <ReactQueryDevtools initialIsOpen={false} />}
 			</QueryClientProvider>
 		</WagmiProvider>
 	</React.StrictMode>

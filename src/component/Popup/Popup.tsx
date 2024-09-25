@@ -1,9 +1,10 @@
+import styles from './Popup.module.css';
 import { IPopupProps } from './Popup.props';
 import { Popup as PopupUI } from 'pixel-retroui';
 
 export function Popup({ open, onClose, children }: IPopupProps) {
 	return (
-		<PopupUI isOpen={open} onClose={() => onClose()}>
+		<PopupUI className={styles.popup} isOpen={open} onClose={() => onClose()}>
 			{children}
 		</PopupUI>
 	);

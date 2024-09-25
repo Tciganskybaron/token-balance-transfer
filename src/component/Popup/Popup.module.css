@@ -1,0 +1,5 @@
+@media (max-width: 1200px) {
+	.popup div:first-child {
+		width: 100%;
+	}
+}
